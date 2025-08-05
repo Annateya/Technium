@@ -11,6 +11,8 @@ class TaskQueue:
     def get_next_task(self):
         if not self.is_empty():
             return self.items.pop(0)
+        else:
+            return None
 
 
 class Task:
