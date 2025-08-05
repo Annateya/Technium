@@ -1,30 +1,36 @@
-class Queue:
+class TaskQueue:
     def __init__(self):
         self.items = []
 
     def is_empty(self):
         return len(self.items) == 0
 
-    def enqueue(self, item):
+    def add_task(self, item):
         self.items.append(item)
 
-    def dequeue(self):
+    def get_next_task(self):
         if not self.is_empty():
             return self.items.pop(0)
-        else:
-            raise IndexError("Стек пуст")
-
-    def size(self):
-        return len(self.items)
 
 
-queue = Queue()
-queue.enqueue(1)
-queue.enqueue(2)
-queue.enqueue(3)
+class Task:
+    def __init__(self, name: str):
+        self.name: str = name
 
-print("Размер очереди:", queue.size())
 
-while not queue.is_empty():
-    item = queue.dequeue()
-    print("Извлечен элемент:", item)
+queue = TaskQueue()
+
+task1 = Task("Задача 1")
+task2 = Task("Задача 2")
+task3 = Task("Задача 3")
+
+queue.add_task(task1)
+queue.add_task(task2)
+queue.add_task(task3)
+
+next_task = queue.get_next_task()
+print(f"Следующая задача: {next_task.name if next_task else 'Нет задач'}")  # Ожидаемый результат: "Задача 1"
+
+queue.get_next_task()  # Извлечь следующую задачу
+
+print(f"Очередь пуста: {queue.is_empty()}")  # Ожидаемый результат: False
